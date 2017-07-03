@@ -9,10 +9,12 @@ namespace bouncycastledes
     class TripleDES
     {
         IBlockCipher engine = new DesEngine();
+        //IBlockCipher engine = new DesEdeEngine();
 
         public byte[] Encrypt(byte[] key, byte[] iv, byte[] data)
         {
-            BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CbcBlockCipher(engine), new ISO7816d4Padding());
+            BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(engine, new ISO7816d4Padding());
+            //cipher.Init(true, new ParametersWithIV(new DesParameters(key), iv));
             cipher.Init(true, new ParametersWithIV(new DesParameters(key), iv));
             byte[] rv = new byte[cipher.GetOutputSize(data.Length)];
             int tam = cipher.ProcessBytes(data, 0, data.Length, rv, 0);
@@ -23,7 +25,7 @@ namespace bouncycastledes
 
         public byte[] Decrypt(byte[] key, byte[] iv, byte[] data)
         {
-            BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CbcBlockCipher(engine), new ISO7816d4Padding());
+            BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(engine, new ISO7816d4Padding());
             cipher.Init(false, new ParametersWithIV(new DesParameters(key), iv));
             byte[] rv = new byte[cipher.GetOutputSize(data.Length)];
             int tam = cipher.ProcessBytes(data, 0, data.Length, rv, 0);

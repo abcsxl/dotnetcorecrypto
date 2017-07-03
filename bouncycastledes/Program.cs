@@ -9,7 +9,7 @@ namespace bouncycastledes
         {
 
             byte[] key = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF".HexToByteArray();
-            byte[] data = "112233445566778899".HexToByteArray();
+            byte[] data = "11223344556677881122334455667788".HexToByteArray();
             byte[] iv = "0000000000000000".HexToByteArray();
 
             TripleDES tripleDes = new TripleDES();
