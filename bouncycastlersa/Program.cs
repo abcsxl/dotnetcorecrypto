@@ -6,7 +6,10 @@ namespace bouncycastlersa
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            RSA rsa = new RSA();
+            rsa.GenerateKey();
+
+            Console.ReadKey(true);
         }
     }
 }
